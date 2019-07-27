@@ -1,13 +1,15 @@
 <template>
     <div>
-        <form @submit="addTodo">
-            <input type="text" name="title" v-model="title" placeholder="ADD TODO....">
-            <input type="submit" value="Submit" class="btn">
-        </form>
+        <v-form @submit="addTodo">
+            <v-text-field prepend-icon="person" type="text" name="title"  v-model="title" placeholder="ADD TODO...."></v-text-field>
+            <v-btn fab dark small color="Primary" type="submit" ><v-icon>add</v-icon></v-btn>
+        </v-form>
     </div>
 </template>
 
 <script>
+import uuid from "uuid";
+
 export default {
     name: "AddTodo",
     data(){
@@ -16,32 +18,20 @@ export default {
         }
     },
     methods:{
-        rand(){
-            const value=rand(2);
-        },
-        addTodo(){
+        addTodo(e){
+            e.preventDefault();
             const newTodo = {
-                id:rand(),
-                title:this.title,
-                completed:false
+                id: uuid.v4(),
+                title: this.title,
+                completed: false
             }
             this.$emit('add-todo', newTodo);
+            this.title='';
         }
     }
 }
 </script>
 
 <style scoped>
-form{
-    display: flex;
-}
 
-input[type="text"]{
-    flex: 10;
-    padding: 5px;
-}
-
-input[type="submit"]{
-    flex: 2;
-}
 </style>

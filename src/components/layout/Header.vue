@@ -1,12 +1,17 @@
 <template>
-    <header class="header">
-        <h1>TodoList</h1>
-    </header>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>TODO</span>
+        <span class="font-weight-light"> -VUE & VEUTIFY</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-toolbar>
+
 </template>
 
 <script>
 export default {
-    name: "Header"
+ 
 }
 </script>
 

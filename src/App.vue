@@ -1,39 +1,85 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>open_in_new</v-icon>
-      </v-btn>
-    </v-toolbar>
-
+   
+    
     <v-content>
-      <HelloWorld/>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+               <v-toolbar dark color="primary">
+                 <v-toolbar-title>
+                   Todo
+                 </v-toolbar-title>
+               </v-toolbar>
+               <v-spacer></v-spacer>
+               <v-card-text>
+                  <Header/>
+                  <AddTodo v-on:add-todo="addTodo"/>
+                  <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+               </v-card-text>
+              
+            </v-card>
+          </v-flex>
+          </v-layout>
+      
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Todos from './components/Todos';
+import Header from './components/layout/Header';
+import AddTodo from './components/AddTodo';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Todos,
+    Header,
+    AddTodo
   },
   data () {
     return {
       //
+       todos:[
+       {
+         id:1,
+         title:"Todo One",
+         completed:false
+       },
+       {
+         id:2,
+         title:"Todo Two",
+         completed:true
+       },
+       {
+         id:3,
+         title:"Todo Three",
+         completed:false
+       }
+     ]
+    }
+    },
+   methods: {
+    deleteTodo(id){
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    addTodo(newTodo){
+      this.todos=[...this.todos, newTodo]
     }
   }
 }
 </script>
+
+<style>
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+</style>
